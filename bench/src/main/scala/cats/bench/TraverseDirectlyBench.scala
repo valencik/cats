@@ -24,7 +24,7 @@ package cats.bench
 import cats.{Eval, Traverse, TraverseFilter}
 import org.openjdk.jmh.annotations.{Benchmark, Param, Scope, Setup, State}
 import org.openjdk.jmh.infra.Blackhole
-import cats.data.Chain
+import scala.collection.immutable.Seq
 
 @State(Scope.Benchmark)
 class TraverseDirectlyBench {
