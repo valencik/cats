@@ -25,11 +25,15 @@ import cats.{Eval, Traverse, TraverseFilter}
 import org.openjdk.jmh.annotations.{Benchmark, Param, Scope, Setup, State}
 import org.openjdk.jmh.infra.Blackhole
 import scala.collection.immutable.Seq
+import scala.collection.immutable.Queue
 
 @State(Scope.Benchmark)
 class TraverseDirectlyBench {
   val seqT: Traverse[Seq] = Traverse[Seq]
   val seqTFilter: TraverseFilter[Seq] = TraverseFilter[Seq]
+
+  val queueT: Traverse[Queue] = Traverse[Queue]
+  val queueTFilter: TraverseFilter[Queue] = TraverseFilter[Queue]
 
   // the unit of CPU work per iteration
   private[this] val Work: Long = 10
@@ -40,10 +44,12 @@ class TraverseDirectlyBench {
   var length: Int = _
 
   var seq: Seq[Int] = _
+  var queue: Queue[Int] = _
 
   @Setup
   def setup(): Unit = {
     seq = 0.until(length).toSeq
+    queue = Queue.range(0, length)
   }
 
   @Benchmark
@@ -106,6 +112,78 @@ class TraverseDirectlyBench {
   @Benchmark
   def mapSeq(bh: Blackhole) = {
     val results = seq.map { i =>
+      val inner = Eval.later {
+        Blackhole.consumeCPU(Work)
+        i * 2
+      }
+
+      // we just want to force the allocation to level the playing field
+      inner.value
+    }
+
+    bh.consume(results)
+  }
+
+  @Benchmark
+  def traverseQueue(bh: Blackhole) = {
+    val result = queueT.traverse(queue) { i =>
+      Eval.later {
+        Blackhole.consumeCPU(Work)
+        i * 2
+      }
+    }
+
+    bh.consume(result.value)
+  }
+
+  @Benchmark
+  def traverseQueueError(bh: Blackhole) = {
+    val result = queueT.traverse(queue) { i =>
+      Eval.later {
+        Blackhole.consumeCPU(Work)
+
+        if (i == length * 0.3) {
+          throw Failure
+        }
+
+        i * 2
+      }
+    }
+
+    try {
+      bh.consume(result.value)
+    } catch {
+      case Failure => ()
+    }
+  }
+
+  @Benchmark
+  def traverse_Queue(bh: Blackhole) = {
+    val result = seqT.traverse_(queue) { i =>
+      Eval.later {
+        Blackhole.consumeCPU(Work)
+        i * 2
+      }
+    }
+
+    bh.consume(result.value)
+  }
+
+  @Benchmark
+  def traverseFilterQueue(bh: Blackhole) = {
+    val result = queueTFilter.traverseFilter(queue) { i =>
+      Eval.later {
+        Blackhole.consumeCPU(Work)
+        if (i % 2 == 0) Some(i * 2) else None
+      }
+    }
+
+    bh.consume(result.value)
+  }
+
+  @Benchmark
+  def mapQueue(bh: Blackhole) = {
+    val results = queue.map { i =>
       val inner = Eval.later {
         Blackhole.consumeCPU(Work)
         i * 2
