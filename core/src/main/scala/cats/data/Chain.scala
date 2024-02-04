@@ -1243,24 +1243,18 @@ sealed abstract private[data] class ChainInstances extends ChainInstances1 {
       def traverse[G[_], A, B](fa: Chain[A])(f: A => G[B])(implicit G: Applicative[G]): G[Chain[B]] =
         if (fa.isEmpty) G.pure(Chain.nil)
         else
-          G match {
-            case _ =>
-              traverseViaChain {
-                val as = collection.mutable.ArrayBuffer[A]()
-                as ++= fa.iterator
-                KernelStaticMethods.wrapMutableIndexedSeq(as)
-              }(f)
-          }
+          traverseViaChain {
+            val as = collection.mutable.ArrayBuffer[A]()
+            as ++= fa.iterator
+            KernelStaticMethods.wrapMutableIndexedSeq(as)
+          }(f)
 
       override def traverse_[G[_], A, B](fa: Chain[A])(f: A => G[B])(implicit G: Applicative[G]): G[Unit] =
-        G match {
-          case _ =>
-            foldRight(fa, Always(G.pure(()))) { (a, acc) =>
-              G.map2Eval(f(a), acc) { (_, _) =>
-                ()
-              }
-            }.value
-        }
+        foldRight(fa, Always(G.pure(()))) { (a, acc) =>
+          G.map2Eval(f(a), acc) { (_, _) =>
+            ()
+          }
+        }.value
 
       override def mapAccumulate[S, A, B](init: S, fa: Chain[A])(f: (S, A) => (S, B)): (S, Chain[B]) =
         StaticMethods.mapAccumulateFromStrictFunctor(init, fa, f)(this)
@@ -1369,14 +1363,11 @@ sealed abstract private[data] class ChainInstances extends ChainInstances1 {
     def traverseFilter[G[_], A, B](fa: Chain[A])(f: A => G[Option[B]])(implicit G: Applicative[G]): G[Chain[B]] =
       if (fa.isEmpty) G.pure(Chain.nil)
       else
-        G match {
-          case _ =>
-            traverseFilterViaChain {
-              val as = collection.mutable.ArrayBuffer[A]()
-              as ++= fa.iterator
-              KernelStaticMethods.wrapMutableIndexedSeq(as)
-            }(f)
-        }
+        traverseFilterViaChain {
+          val as = collection.mutable.ArrayBuffer[A]()
+          as ++= fa.iterator
+          KernelStaticMethods.wrapMutableIndexedSeq(as)
+        }(f)
 
     override def filterA[G[_], A](fa: Chain[A])(f: A => G[Boolean])(implicit G: Applicative[G]): G[Chain[A]] =
       traverse
