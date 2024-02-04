@@ -1249,6 +1249,13 @@ sealed abstract private[data] class ChainInstances extends ChainInstances1 {
             KernelStaticMethods.wrapMutableIndexedSeq(as)
           }(f)
 
+      override def traverse_[G[_], A, B](fa: Chain[A])(f: A => G[B])(implicit G: Applicative[G]): G[Unit] =
+        foldRight(fa, Always(G.unit)) { (a, acc) =>
+          G.map2Eval(f(a), acc) { (_, _) =>
+            ()
+          }
+        }.value
+
       override def mapAccumulate[S, A, B](init: S, fa: Chain[A])(f: (S, A) => (S, B)): (S, Chain[B]) =
         StaticMethods.mapAccumulateFromStrictFunctor(init, fa, f)(this)
 
@@ -1341,7 +1348,7 @@ sealed abstract private[data] class ChainInstances extends ChainInstances1 {
     }
 
   implicit val catsDataTraverseFilterForChain: TraverseFilter[Chain] = new TraverseFilter[Chain] {
-    def traverse: Traverse[Chain] = Chain.catsDataInstancesForChain
+    def traverse: Traverse[Chain] with Alternative[Chain] = Chain.catsDataInstancesForChain
 
     override def filter[A](fa: Chain[A])(f: A => Boolean): Chain[A] = fa.filter(f)
 
