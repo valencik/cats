@@ -60,7 +60,11 @@
   
   <link rel="stylesheet" type="text/css" href="../helium/site/icofont.min.css" />
     <link rel="stylesheet" type="text/css" href="../helium/site/laika-helium.css" />
+    <link rel="stylesheet" type="text/css" href="../search/search.css" />
   <script src="../helium/site/laika-helium.js"></script>
+    <script src="../search/protosearch.js"></script>
+    <script src="../search/searchBar.js"></script>
+    <script src="../search/searchBarWorker.js"></script>
   
   
   <script> /* for avoiding page load transitions */ </script>
@@ -74,15 +78,26 @@
     <a id="nav-icon">
       <i class="icofont-laika navigationMenu" title="Navigation">&#xefa2;</i>
     </a>
-    
+
     
   </div>
 
   <a class="image-link" href="https://typelevel.org"><img src="https://typelevel.org/img/logo.svg"></a>
 
+  <div class="row search-row">
+    <input id="search-top-bar" class="input" type="text" placeholder="Search">
+  </div>
+  <div id="search-modal" class="search-modal">
+    <div class="search-modal-content">
+      <span class="search-close">&times;</span>
+      <input id="search-modal-input" class="input" type="text">
+      <div id="search-modal-content-body"></div>
+    </div>
+  </div>
+
   <div class="row links">
     
-    <a class="icon-link svg-link" href="https://s01.oss.sonatype.org/service/local/repositories/snapshots/archive/org/typelevel/cats-docs_2.13/2.11-4f15360-SNAPSHOT/cats-docs_2.13-2.11-4f15360-SNAPSHOT-javadoc.jar/!/index.html"><span class="api" title="API"><svg class="svg-icon" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <a class="icon-link svg-link" href="https://s01.oss.sonatype.org/service/local/repositories/snapshots/archive/org/typelevel/cats-docs_2.13/2.12-1d0ff95-SNAPSHOT/cats-docs_2.13-2.12-1d0ff95-SNAPSHOT-javadoc.jar/!/index.html"><span class="api" title="API"><svg class="svg-icon" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
   <g class="svg-shape">
     <path d="M75,47.5c13.246,0 24,10.754 24,24c0,13.246 -10.754,24 -24,24c-13.246,0 -24,-10.754 -24,-24c0,-13.246 10.754,-24 24,-24Zm-50,-0c13.246,-0 24,10.754 24,24c0,13.246 -10.754,24 -24,24c-13.246,-0 -24,-10.754 -24,-24c0,-13.246 10.754,-24 24,-24Zm2.705,16.735l7.239,0l0.622,-4.904l-21.833,0l-0,4.904l7.589,0l0,22.067l6.383,0l-0,-22.067Zm58.076,7.265c-0,-8.757 -3.698,-14.166 -10.781,-14.166c-7.083,-0 -10.781,5.604 -10.781,14.166c0,8.757 3.698,14.166 10.781,14.166c7.083,0 10.781,-5.604 10.781,-14.166Zm-6.539,0c0,6.538 -1.128,9.496 -4.242,9.496c-2.997,0 -4.242,-2.88 -4.242,-9.496c-0,-6.616 1.206,-9.496 4.242,-9.496c3.036,-0 4.242,2.88 4.242,9.496Zm-29.242,-67c13.246,0 24,10.754 24,24c0,13.246 -10.754,24 -24,24c-13.246,0 -24,-10.754 -24,-24c0,-13.246 10.754,-24 24,-24Zm0.512,9.834c-7.122,-0 -12.609,5.098 -12.609,14.127c-0,9.263 5.215,14.205 12.532,14.205c4.164,0 7.083,-1.634 9.068,-3.658l-2.88,-3.697c-1.518,1.206 -3.153,2.413 -5.838,2.413c-3.697,-0 -6.266,-2.763 -6.266,-9.263c-0,-6.616 2.724,-9.379 6.149,-9.379c2.102,-0 3.892,0.778 5.371,1.984l3.113,-3.775c-2.257,-1.868 -4.748,-2.957 -8.64,-2.957Z"/>
   </g>
@@ -102,15 +117,16 @@
   </g>
 </svg></span></a>
     
-  </div>  
+  </div>
 
 </header>
+
     
     <nav id="sidebar">
 
   <div class="row">
     
-    <a class="icon-link svg-link" href="https://s01.oss.sonatype.org/service/local/repositories/snapshots/archive/org/typelevel/cats-docs_2.13/2.11-4f15360-SNAPSHOT/cats-docs_2.13-2.11-4f15360-SNAPSHOT-javadoc.jar/!/index.html"><span class="api" title="API"><svg class="svg-icon" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <a class="icon-link svg-link" href="https://s01.oss.sonatype.org/service/local/repositories/snapshots/archive/org/typelevel/cats-docs_2.13/2.12-1d0ff95-SNAPSHOT/cats-docs_2.13-2.12-1d0ff95-SNAPSHOT-javadoc.jar/!/index.html"><span class="api" title="API"><svg class="svg-icon" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
   <g class="svg-shape">
     <path d="M75,47.5c13.246,0 24,10.754 24,24c0,13.246 -10.754,24 -24,24c-13.246,0 -24,-10.754 -24,-24c0,-13.246 10.754,-24 24,-24Zm-50,-0c13.246,-0 24,10.754 24,24c0,13.246 -10.754,24 -24,24c-13.246,-0 -24,-10.754 -24,-24c0,-13.246 10.754,-24 24,-24Zm2.705,16.735l7.239,0l0.622,-4.904l-21.833,0l-0,4.904l7.589,0l0,22.067l6.383,0l-0,-22.067Zm58.076,7.265c-0,-8.757 -3.698,-14.166 -10.781,-14.166c-7.083,-0 -10.781,5.604 -10.781,14.166c0,8.757 3.698,14.166 10.781,14.166c7.083,0 10.781,-5.604 10.781,-14.166Zm-6.539,0c0,6.538 -1.128,9.496 -4.242,9.496c-2.997,0 -4.242,-2.88 -4.242,-9.496c-0,-6.616 1.206,-9.496 4.242,-9.496c3.036,-0 4.242,2.88 4.242,9.496Zm-29.242,-67c13.246,0 24,10.754 24,24c0,13.246 -10.754,24 -24,24c-13.246,0 -24,-10.754 -24,-24c0,-13.246 10.754,-24 24,-24Zm0.512,9.834c-7.122,-0 -12.609,5.098 -12.609,14.127c-0,9.263 5.215,14.205 12.532,14.205c4.164,0 7.083,-1.634 9.068,-3.658l-2.88,-3.697c-1.518,1.206 -3.153,2.413 -5.838,2.413c-3.697,-0 -6.266,-2.763 -6.266,-9.263c-0,-6.616 2.724,-9.379 6.149,-9.379c2.102,-0 3.892,0.778 5.371,1.984l3.113,-3.775c-2.257,-1.868 -4.748,-2.957 -8.64,-2.957Z"/>
   </g>
@@ -231,7 +247,7 @@
       <main class="content">
 
         <h1 id="applicativeerror-and-monaderror" class="title">ApplicativeError and MonadError</h1>
-        <p>API Documentation: <a class="api" href="https://www.javadoc.io/doc/org.typelevel/cats-docs_2.13/2.11-4f15360-SNAPSHOT/cats/ApplicativeError.html">ApplicativeError</a>, <a class="api" href="https://www.javadoc.io/doc/org.typelevel/cats-docs_2.13/2.11-4f15360-SNAPSHOT/cats/MonadError.html">MonadError</a></p>
+        <p>API Documentation: <a class="api" href="https://www.javadoc.io/doc/org.typelevel/cats-docs_2.13/2.12-1d0ff95-SNAPSHOT/cats/ApplicativeError.html">ApplicativeError</a>, <a class="api" href="https://www.javadoc.io/doc/org.typelevel/cats-docs_2.13/2.12-1d0ff95-SNAPSHOT/cats/MonadError.html">MonadError</a></p>
         
         <h2 id="applicative-error" class="section"><a class="anchor-link left" href="#applicative-error"><i class="icofont-laika link">&#xef71;</i></a>Applicative Error</h2>
         
@@ -425,26 +441,24 @@
         <p>With the methods that we will compose in place let&#39;s create a method that will
         compose the above methods using a for comprehension which
         interprets to a <code>flatMap</code>-<code>map</code> combination.<br></p>
-        <p><code>getTemperatureFromByCoordinates</code> parameterized type 
-        <code>[F[_]:MonadError[*[_], String]</code> injects <code>F[_]</code> into <code>MonadError[*[_], String]</code>
+        <p><code>getTemperatureByCoordinates</code>&#39;s parameterized type
+        <code>[F[_]:MonadError[*[_], String]</code> injects <code>F[_]</code> into <code>MonadError[*[_], String]</code>;
         thus if the &quot;error type&quot; you wish to use is <code>Either[String, *]</code>, the <code>Either</code>
         would be placed in the hole of <code>MonadError</code>, in this case, 
         <code>MonadError[Either[String, *], String]</code></p>
-        <p><code>getTemperatureFromByCoordinates</code> accepts a <code>Tuple2</code> of <code>Int</code> and <code>Int</code>, and we
-        return <code>F</code> which represents our <code>MonadError</code> which can be a type like <code>Either</code> or
-        <code>Validated</code>. In the method, since either <code>getCityClosestToCoordinate</code> and
-        <code>getTemperatureByCity</code> both return potential error types and they are monadic we can
+        <p><code>getTemperatureByCoordinates</code> accepts a <code>Tuple2</code> of <code>Int</code> and <code>Int</code> and
+        returns <code>F</code>, which represents our <code>MonadError</code>, which can be a type like <code>Either</code> or
+        <code>Validated</code>. In the method, since <code>getCityClosestToCoordinate</code> and
+        <code>getTemperatureByCity</code> both return potential error types and they are monadic, we can
         compose them with a for comprehension.</p>
         <pre class="keep-together pdf epub"><code class="nohighlight"><span class="keyword">def</span><span> </span><span class="declaration-name">getTemperatureByCoordinates</span><span>[</span><span class="type-name">F</span><span>[</span><span class="identifier">_</span><span>]: </span><span class="type-name">MonadError</span><span>[*[</span><span class="identifier">_</span><span>], </span><span class="type-name">String</span><span>]](</span><span class="identifier">x</span><span>: (</span><span class="type-name">Int</span><span>, </span><span class="type-name">Int</span><span>)): </span><span class="type-name">F</span><span>[</span><span class="type-name">Int</span><span>] = {
   </span><span class="keyword">for</span><span> { </span><span class="identifier">c</span><span> &lt;- </span><span class="identifier">getCityClosestToCoordinate</span><span>[</span><span class="type-name">F</span><span>](</span><span class="identifier">x</span><span>)
         </span><span class="identifier">t</span><span> &lt;- </span><span class="identifier">getTemperatureByCity</span><span>[</span><span class="type-name">F</span><span>](</span><span class="identifier">c</span><span>) } </span><span class="keyword">yield</span><span> </span><span class="identifier">t</span><span>
 }</span></code></pre>
-        <p>Invoking <code>getTemperatureByCoordinates</code> we can call it with the following sample, 
-        which will return <code>78</code>. </p>
-        <p>NOTE: infix <code>-&gt;</code> creates a <code>Tuple2</code>. <code>1 -&gt; &quot;Bob&quot;</code> is the same as <code>(1, &quot;Bob&quot;)</code></p>
+        <p>We can call <code>getTemperatureByCoordinates</code> with the following sample, which will return <code>78</code>.</p>
         <pre class="keep-together pdf epub"><code class="nohighlight"><span class="keyword">type</span><span> </span><span class="type-name">MyEither</span><span>[</span><span class="type-name">A</span><span>] = </span><span class="type-name">Either</span><span>[</span><span class="type-name">String</span><span>, </span><span class="type-name">A</span><span>]
-</span><span class="identifier">getTemperatureByCoordinates</span><span>[</span><span class="type-name">MyEither</span><span>](</span><span class="number-literal">44</span><span> -&gt; </span><span class="number-literal">93</span><span>)</span></code></pre>
-        <p>With TypeLevel Cats, how you structure your methods is up to you, if you wanted to
+</span><span class="identifier">getTemperatureByCoordinates</span><span>[</span><span class="type-name">MyEither</span><span>]((</span><span class="number-literal">44</span><span>, </span><span class="number-literal">93</span><span>))</span></code></pre>
+        <p>With TypeLevel Cats, how you structure your methods is up to you: if you wanted to
         create <code>getTemperatureByCoordinates</code> without a Scala 
         <a href="https://docs.scala-lang.org/tutorials/FAQ/context-bounds.html">context bound</a> for <code>MonadError</code>,
         but create an <code>implicit</code> parameter for your <code>MonadError</code> you can have access to some 
@@ -453,7 +467,7 @@
         and call it <code>me</code>. Using the <code>me</code> reference, we can call any one of its 
         specialized methods, like <code>raiseError</code>, to raise an error representation
         when things go wrong.</p>
-        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="keyword">def</span><span> </span><span class="declaration-name">getTemperatureFromByCoordinatesAlternate</span><span>[</span><span class="type-name">F</span><span>[</span><span class="identifier">_</span><span>]](</span><span class="identifier">x</span><span>: (</span><span class="type-name">Int</span><span>, </span><span class="type-name">Int</span><span>))(</span><span class="keyword">implicit</span><span> </span><span class="identifier">me</span><span>: </span><span class="type-name">MonadError</span><span>[</span><span class="type-name">F</span><span>, </span><span class="type-name">String</span><span>]): </span><span class="type-name">F</span><span>[</span><span class="type-name">Int</span><span>] = {
+        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="keyword">def</span><span> </span><span class="declaration-name">getTemperatureByCoordinatesAlternate</span><span>[</span><span class="type-name">F</span><span>[</span><span class="identifier">_</span><span>]](</span><span class="identifier">x</span><span>: (</span><span class="type-name">Int</span><span>, </span><span class="type-name">Int</span><span>))(</span><span class="keyword">implicit</span><span> </span><span class="identifier">me</span><span>: </span><span class="type-name">MonadError</span><span>[</span><span class="type-name">F</span><span>, </span><span class="type-name">String</span><span>]): </span><span class="type-name">F</span><span>[</span><span class="type-name">Int</span><span>] = {
   </span><span class="keyword">if</span><span> (</span><span class="identifier">x</span><span class="number-literal">._1</span><span> &lt; </span><span class="number-literal">0</span><span> || </span><span class="identifier">x</span><span class="number-literal">._2</span><span> &lt; </span><span class="number-literal">0</span><span>) </span><span class="identifier">me</span><span>.</span><span class="identifier">raiseError</span><span>(</span><span class="string-literal">&quot;Invalid Coordinates&quot;</span><span>)
   </span><span class="keyword">else</span><span> </span><span class="keyword">for</span><span> { </span><span class="identifier">c</span><span> &lt;- </span><span class="identifier">getCityClosestToCoordinate</span><span>[</span><span class="type-name">F</span><span>](</span><span class="identifier">x</span><span>)
         </span><span class="identifier">t</span><span> &lt;- </span><span class="identifier">getTemperatureByCity</span><span>[</span><span class="type-name">F</span><span>](</span><span class="identifier">c</span><span>) } </span><span class="keyword">yield</span><span> </span><span class="identifier">t</span><span>
