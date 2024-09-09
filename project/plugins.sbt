@@ -9,4 +9,4 @@ addSbtPlugin("com.eed3si9n" % "sbt-buildinfo" % "0.12.0")
 
 resolvers +=
   "Sonatype OSS Snapshots".at("https://s01.oss.sonatype.org/content/repositories/snapshots")
-addSbtPlugin("pink.cozydev" % "protosearch-sbt" % "0.0-e5cdabe-SNAPSHOT")
+addSbtPlugin("pink.cozydev" % "protosearch-sbt" % "0.0-c102b5d-SNAPSHOT")
