@@ -6,3 +6,7 @@ addSbtPlugin("com.github.tkawachi" % "sbt-doctest" % "0.10.0")
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.16.0")
 addSbtPlugin("org.scala-native" % "sbt-scala-native" % "0.5.5")
 addSbtPlugin("com.eed3si9n" % "sbt-buildinfo" % "0.12.0")
+
+resolvers +=
+  "Sonatype OSS Snapshots" at "https://s01.oss.sonatype.org/content/repositories/snapshots"
+addSbtPlugin("pink.cozydev" % "protosearch-sbt" % "0.0-4f78b8a-SNAPSHOT")
