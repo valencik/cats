@@ -8,3 +8,7 @@ addSbtPlugin("org.scala-native" % "sbt-scala-native" % "0.5.6")
 addSbtPlugin("com.eed3si9n" % "sbt-buildinfo" % "0.13.1")
 
 libraryDependencySchemes += "com.lihaoyi" %% "geny" % VersionScheme.Always
+
+resolvers +=
+  "Sonatype OSS Snapshots".at("https://s01.oss.sonatype.org/content/repositories/snapshots")
+addSbtPlugin("pink.cozydev" % "protosearch-sbt" % "0.0-b662d74-SNAPSHOT")
