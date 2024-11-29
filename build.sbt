@@ -12,14 +12,16 @@ val PrimaryJava = JavaSpec.temurin("8")
 val LTSJava = JavaSpec.temurin("17")
 val GraalVM = JavaSpec.graalvm("21")
 
-ThisBuild / githubWorkflowJavaVersions := Seq(PrimaryJava, LTSJava, GraalVM)
+ThisBuild / githubWorkflowJavaVersions := Seq(PrimaryJava)
 
 val Scala212 = "2.12.20"
 val Scala213 = "2.13.15"
 val Scala3 = "3.3.4"
 
-ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
+ThisBuild / crossScalaVersions := Seq(Scala213)
 ThisBuild / scalaVersion := Scala213
+
+ThisBuild / tlCiDependencyGraphJob := false
 
 ThisBuild / tlFatalWarnings := false
 
